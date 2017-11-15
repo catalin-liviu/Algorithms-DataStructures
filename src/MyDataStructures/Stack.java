@@ -7,7 +7,6 @@ package MyDataStructures;
 public class Stack<T> {
 
     private Node head;
-    private Node last;
 
     private class Node {
         T item;

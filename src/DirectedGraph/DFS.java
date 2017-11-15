@@ -6,7 +6,7 @@ import java.util.Stack;
  * Created by catalin.dinu on 11/8/2017.
  */
 
-public class DirectedDFS {
+public class DFS {
 
     private boolean[] marked;       // marked[v] - return true if v is reachable from a given source vertex
     private int count;              // number of vertices from source to v
@@ -14,7 +14,7 @@ public class DirectedDFS {
     private int[] edgeTo;
 
 
-    public DirectedDFS(DirectedGraphAdjListRepresented G, int source) {
+    public DFS(DirectedGraphAdjListRepresented G, int source) {
         marked = new boolean[G.V()];
         edgeTo = new int[G.V()];
         s= source;

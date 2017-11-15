@@ -75,10 +75,11 @@ public class LinkedListTest {
         list.addLast(11);
         list.addLast(12);
         list.addLast(13);
+        list.addFirst(1111);
         list.print();
         System.out.println();
 
-        list.add((list.size()/2), 1000);
+        list.add(0, 1000);
         list.print();
 
 

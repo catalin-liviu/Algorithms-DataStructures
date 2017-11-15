@@ -11,6 +11,8 @@ import org.junit.Test;
 
 public class DirectedGraphUnitTest {
 
+
+
     @Test
     public void testBFS_find_shortest_path() {
 
@@ -33,7 +35,7 @@ public class DirectedGraphUnitTest {
         /**
         * Started BFS
         * */
-        DirectedBFS bfs = new DirectedBFS(G, 7);
+        BFS bfs = new BFS(G, 7);
 
         // tested if bfs returns the shortest path
         Assert.assertTrue(bfs.hasPathTo(1));
@@ -57,7 +59,7 @@ public class DirectedGraphUnitTest {
         /**
          * Started DFS
          * */
-        DirectedDFS dfs = new DirectedDFS(G, 7);
+        DFS dfs = new DFS(G, 7);
 
         /*
         * If there is path from s to dest
@@ -72,7 +74,7 @@ public class DirectedGraphUnitTest {
     }
 
     @Test
-    public void testIfDAG() {
+    public void testCyclicDirectedGraph() {
         DirectedGraphAdjListRepresented G = new DirectedGraphAdjListRepresented(13);
         G.addEdge(0,1); G.addEdge(0,5); G.addEdge(2,0); G.addEdge(2,3);
         G.addEdge(3,2); G.addEdge(3,5); G.addEdge(4,2); G.addEdge(4,3);
@@ -84,19 +86,19 @@ public class DirectedGraphUnitTest {
         /**
          * Starts the cycle search
          * */
-        CycleFinderDFS cycleFinderDFS = new CycleFinderDFS(G);
+        CycleFinder cycleFinder = new CycleFinder(G);
 
         /*
         * Asserts if the graph contain cycles
         * If finds one, it prints it out
         * */
-        Assert.assertTrue(cycleFinderDFS.hasCycle());
+        Assert.assertTrue(cycleFinder.hasCycle());
         System.out.print("Graph has direct cycles - Ex: ");
-        System.out.println(cycleFinderDFS.cycle().toString());
+        System.out.println(cycleFinder.cycle().toString());
     }
 
     @Test
-    public void testIFDAG() {
+    public void testAcyclicDirectedGraph() {
         DirectedGraphAdjListRepresented G = new DirectedGraphAdjListRepresented(13);
         G.addEdge(0,1); G.addEdge(0,5); G.addEdge(0,6); G.addEdge(2,3);
         G.addEdge(2,0); G.addEdge(3,5); G.addEdge(5,4); G.addEdge(6,4);
@@ -106,20 +108,28 @@ public class DirectedGraphUnitTest {
         /**
          * Starts the cycle search
          * */
-        CycleFinderDFS cycleFinderDFS = new CycleFinderDFS(G);
+        CycleFinder cycleFinder = new CycleFinder(G);
 
-        Assert.assertTrue(!cycleFinderDFS.hasCycle());
-        if (!cycleFinderDFS.hasCycle()) {
+        Assert.assertTrue(!cycleFinder.hasCycle());
+        if (!cycleFinder.hasCycle()) {
             System.out.println("Directed Acyclic Graph");
         }
+    }
+
+    @Test
+    public void testTopoligicalSort() {
+        DirectedGraphAdjListRepresented G = new DirectedGraphAdjListRepresented(13);
+        G.addEdge(0,1); G.addEdge(0,5); G.addEdge(0,6); G.addEdge(2,3);
+        G.addEdge(2,0); G.addEdge(3,5); G.addEdge(5,4); G.addEdge(6,4);
+        G.addEdge(6,9); G.addEdge(7,6); G.addEdge(8,7); G.addEdge(9,10);
+        G.addEdge(9,11); G.addEdge(9,12); G.addEdge(11,12);
+
 
         /**
-        * Order grapth using Depth First Algorithm
-        * */
-        DirectedDFOrder dfsOrder = new DirectedDFOrder(G);
-        dfsOrder.topologicalSortDisplay();
-
-
+         * Order graph using Depth First Algorithm
+         * */
+        TopologicalSort topologicalSort = new TopologicalSort(G);
+        topologicalSort.display();
     }
 
 

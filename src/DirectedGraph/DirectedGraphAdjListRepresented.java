@@ -9,7 +9,6 @@ import MyDataStructures.Bag;
 
 public class DirectedGraphAdjListRepresented {
 
-    private static final String NEWLINE = System.getProperty("line.separator");
     private int V;                  // number of vertices
     private int E;                  // number of edges
     private Bag<Integer>[] adj;     // array of bags, will hold adjacent vertices for every vertex in the graph
@@ -82,13 +81,13 @@ public class DirectedGraphAdjListRepresented {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        s.append(V + " vertices, " + E + " edges " + NEWLINE);
+        s.append(V + " vertices, " + E + " edges \n");
         for (int v = 0; v < V; v++) {
             s.append(v + ": ");
             for (int w : adj[v]) {
                 s.append(w + " ");
             }
-            s.append(NEWLINE);
+            s.append("\n");
         }
         return s.toString();
     }

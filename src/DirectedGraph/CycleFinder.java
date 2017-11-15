@@ -6,14 +6,14 @@ import java.util.Stack;
  * Created by catalin.dinu on 11/8/2017.
  */
 
-public class    CycleFinderDFS {
+public class CycleFinder {
 
     private boolean[] marked;
     private boolean[] onStack;
     private int[] edgeTo;
     private Stack<Integer> cycle;
 
-    public CycleFinderDFS(DirectedGraphAdjListRepresented G) {
+    public CycleFinder(DirectedGraphAdjListRepresented G) {
         marked = new boolean[G.V()];
         onStack = new boolean[G.V()];
         edgeTo = new int[G.V()];

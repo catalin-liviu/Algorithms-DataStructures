@@ -8,7 +8,7 @@ import MyDataStructures.Bag;
  */
 
 public class UndirectedGraphAdjListRepresented {
-    private static final String NEWLINE = System.getProperty("line.separator");
+
     private int V;                  // number of vertices
     private int E;
     private Bag<Integer>[] adj;
@@ -61,13 +61,13 @@ public class UndirectedGraphAdjListRepresented {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        s.append(V + " vertices, " + E + " edges " + NEWLINE);
+        s.append(V + " vertices, " + E + " edges \n");
         for (int v = 0; v < V; v++) {
             s.append(v + ": ");
             for (int w : adj[v]) {
                 s.append(w + " ");
             }
-            s.append(NEWLINE);
+            s.append("\n");
         }
         return s.toString();
 

@@ -4,9 +4,10 @@ import java.util.Iterator;
 
 
 public class LinkedList<T> implements Iterable<T> {
-
+    // Member variable - first node in list
     private Node first;
 
+    // helper inner class
     private class Node {
         T item;
         Node link;
@@ -19,8 +20,24 @@ public class LinkedList<T> implements Iterable<T> {
     }
 
 
-    public void print() {
+    private class MyLinkedListIterator implements Iterator<T> {
+        Node current = first;
 
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public T next() {
+            T item = current.item;
+            current = current.link;
+            return item;
+        }
+    }
+
+
+    public void print() {
         for ( T item: this) {
             System.out.printf("%s", item.toString() + " ");
         }
@@ -78,11 +95,10 @@ public class LinkedList<T> implements Iterable<T> {
 
 
     public void addFirst(T item) {
-        MyLinkedListIterator iterator = new MyLinkedListIterator();
         Node newNode = new Node();
         newNode.item = item;
 
-        if (!iterator.hasNext()) {
+        if (first == null) {
             first = newNode;
         } else {
             newNode.link = first;
@@ -101,7 +117,6 @@ public class LinkedList<T> implements Iterable<T> {
                 iterator.current = iterator.current.link;
             }
             iterator.current.link = newNode;
-
         }else {
             first = newNode;
         }
@@ -130,7 +145,6 @@ public class LinkedList<T> implements Iterable<T> {
         int count = 0;
 
         while (iterator.hasNext()){
-//            if(iterator.next() != null)
                 iterator.next();
                 count++;
         }
@@ -170,23 +184,5 @@ public class LinkedList<T> implements Iterable<T> {
             iterator.current = nextNode;
         }
         first = previousNode;
-    }
-
-
-    private class MyLinkedListIterator implements Iterator<T> {
-
-        Node current = first;
-
-        @Override
-        public boolean hasNext() {
-            return current != null;
-        }
-
-        @Override
-        public T next() {
-            T item = current.item;
-            current = current.link;
-            return item;
-        }
     }
 }

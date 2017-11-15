@@ -16,11 +16,11 @@ public class DFS {
     /*
     * Constructor
     * */
-    public DFS(UndirectedGraphAdjListRepresented G, int source) {
-        s = source;
+    public DFS(UndirectedGraphAdjListRepresented G, int s) {
+        this.s = s;
         marked = new boolean[G.V()];
         edgeTo = new int[G.V()];
-        dfs(G, source);
+        dfs(G, s);
     }
 
     // recursive dfs method call
@@ -80,5 +80,5 @@ public class DFS {
     }
     public void setMarked(boolean[] marked) {
         this.marked = marked;
-    };
+    }
 }

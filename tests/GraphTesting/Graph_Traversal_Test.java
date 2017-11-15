@@ -35,7 +35,6 @@ public class Graph_Traversal_Test {
         graph.addEdge(2, 9);
 
         System.out.println(graph);
-        System.out.println();
         Assert.assertTrue(graph.V() == 13);
         System.out.println("Vertices Number - Assert Successful");
         Assert.assertTrue(graph.E() == 16);
@@ -46,32 +45,32 @@ public class Graph_Traversal_Test {
         * path search
         * */
         DFS processDFS = new DFS(graph, 0);
-
         BFS processBFS = new BFS(graph, 0);
 
-        System.out.println();
+
 
         /*
         * show path from source to a given vertex
         * */
         System.out.println("Path - from destination to source" + processDFS.pathTo(10).toString());
-
-        System.out.println("Path - from destination to source" + processDFS.pathTo(8).toString());
-
-        System.out.println();
-
-
-
-        System.out.println();
+        System.out.println("Path - from destination to source" + processDFS.pathTo(7).toString());
 
         /*
         * show the shortest path from source to a given vertex
         * */
         System.out.println("Shortest Path - from destination to source" + processBFS.pathTo(10).toString());
+        System.out.println("Shortest Path - from destination to source" + processBFS.pathTo(7).toString());
 
-        System.out.println("Shortest Path - from destination to source" + processBFS.pathTo(8).toString());
+        int i = 0;
+        while (i <= 50) {
+            int steps = -1;
+            for (int x: processBFS.pathTo(10)) {
+                steps++;
+            }
+            Assert.assertTrue(steps == 3);
+            i++;
+        }
 
-        System.out.println();
 
         /*
         * Confirms that every vertex in the path, has been visited

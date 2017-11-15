@@ -28,9 +28,12 @@ public class QueueTest {
         Queue queue = new Queue();
         queue.offer(1);
         queue.offer(2);
+        queue.offer(2);
+        queue.offer(2);
+        queue.offer(8);
         int size = queue.size();
 
-        Assert.assertFalse(size == 0);
+        Assert.assertTrue(size == 5);
 
     }
 
@@ -39,10 +42,11 @@ public class QueueTest {
         Queue queue = new Queue();
         queue.offer(1);
         queue.offer(1);
+        queue.offer(200);
         queue.offer(2);
         queue.offer(5);
         queue.print();
-        Assert.assertTrue(queue.contains(5));
+        Assert.assertTrue(queue.contains(200));
     }
 
     @Test

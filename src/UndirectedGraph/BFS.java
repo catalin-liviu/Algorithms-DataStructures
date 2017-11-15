@@ -15,6 +15,7 @@ public class BFS {
     private boolean[] marked;             // keep track of visited vertices on a s-v path
     private int[] edgeTo;                 // keep track of the last edge on the s-v path
     private int[] distTo;                 // keep track of the shortest path from s to v
+    private int steps;
 
 
     // Constructor
@@ -74,6 +75,7 @@ public class BFS {
         int x;
         for (x = v; distTo[x] != 0 ; x = edgeTo[x]) {
             stack.push(x);
+            steps++;
         }
         stack.push(x);
         return stack;
@@ -87,5 +89,9 @@ public class BFS {
         if (v < 0 || v >= V) {
             throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V - 1));
         }
+    }
+
+    public int getSteps() {
+        return steps;
     }
 }

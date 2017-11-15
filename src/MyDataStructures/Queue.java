@@ -22,10 +22,8 @@ public class Queue<T> implements Iterable<T>{
 
 
     public void print(){
-        Node it = head;
-        while (it != null){
-            System.out.println(it.item);
-            it = it.link;
+        for (T item : this) {
+            System.out.print(" " + item + "");
         }
     }
 
@@ -36,24 +34,21 @@ public class Queue<T> implements Iterable<T>{
 
 
     public int size(){
-        Node it = head;
-        int size = 0;
-        while ( it != null ) {
-            size++;
-            it = it.link;
+        int items = 0;
+        for (T item: this) {
+            items++;
         }
-        return size;
+        return items;
     }
 
 
     public boolean contains(Object o){
-        Node it = head;
-        while (it != null) {
-            if (it.item.equals(o)) {
-                return true;
-            }
-            it = it.link;
-        }
+       QueueIterator iterator = new QueueIterator();
+       while (iterator.hasNext()) {
+           if (iterator.next().equals(o)) {
+               return true;
+           }
+       }
         return false;
     }
 
@@ -89,13 +84,10 @@ public class Queue<T> implements Iterable<T>{
 
 
     public T peek(){
-        T item;
         if(this.isEmpty()){
             return null;
-        } else {
-            item = head.item;
         }
-        return item;
+        return head.item;
     }
 
 
@@ -137,7 +129,6 @@ public class Queue<T> implements Iterable<T>{
     public Iterator<T> iterator() {
         return new QueueIterator();
     }
-
 
     private class QueueIterator implements Iterator<T> {
         Node current = head;

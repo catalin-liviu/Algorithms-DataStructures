@@ -9,13 +9,14 @@ import java.util.Stack;
  * Created by catalin.dinu on 11/8/2017.
  */
 
-public class DirectedBFS {
-    private boolean[] marked;
+public class BFS {
+    // Member variables
+    private boolean[] marked;       // will hold an evidence of the visited vertices
     private int[] edgeTo;
     private int[] distTo;
 
 
-    public DirectedBFS(DirectedGraphAdjListRepresented G, int source) {
+    public BFS(DirectedGraphAdjListRepresented G, int source) {
         marked = new boolean[G.V()];
         edgeTo = new int[G.V()];
         distTo = new int[G.V()];

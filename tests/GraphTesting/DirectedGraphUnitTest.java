@@ -2,6 +2,8 @@ package GraphTesting;
 
 
 import DirectedGraph.*;
+import MyDataStructures.Bag;
+import MyDataStructures.LinkedList;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -129,8 +131,28 @@ public class DirectedGraphUnitTest {
          * Order graph using Depth First Algorithm
          * */
         TopologicalSort topologicalSort = new TopologicalSort(G);
-        topologicalSort.display();
+        LinkedList<Integer> topologicSortedList = topologicalSort.sort();
+        Assert.assertTrue(topologicSortedList.get(4) == 0);
+        Assert.assertTrue(topologicSortedList.get(topologicSortedList.size()-1) == 12);
+
     }
 
+    @Test
+    public void testReverse_should_reverse_the_edges_direction() {
+        DirectedGraphAdjListRepresented G = new DirectedGraphAdjListRepresented(13);
+        G.addEdge(0,1); G.addEdge(0,5); G.addEdge(0,6); G.addEdge(2,3);
+        G.addEdge(2,0); G.addEdge(3,5); G.addEdge(5,4); G.addEdge(6,4);
+        G.addEdge(6,9); G.addEdge(7,6); G.addEdge(8,7); G.addEdge(9,10);
+        G.addEdge(9,11); G.addEdge(9,12); G.addEdge(11,12);
+
+
+        DirectedGraphAdjListRepresented reversedG = G.reverse();
+        Bag<Integer> adjOfNode6 = (Bag<Integer>) reversedG.adj(6);
+        Assert.assertTrue(adjOfNode6.contains(0) && adjOfNode6.contains(7));
+        Bag<Integer> adjOfNode12 = (Bag<Integer>) reversedG.adj(12);
+        Assert.assertTrue(adjOfNode12.contains(11) && adjOfNode12.contains(9));
+        Bag<Integer> adjOfNode2 = (Bag<Integer>) reversedG.adj(2);
+        Assert.assertTrue(adjOfNode2.isEmpty());
+    }
 
 }

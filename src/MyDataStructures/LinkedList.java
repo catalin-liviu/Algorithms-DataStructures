@@ -13,12 +13,10 @@ public class LinkedList<T> implements Iterable<T> {
         Node link;
     }
 
-
     @Override
     public Iterator<T> iterator() {
         return new MyLinkedListIterator();
     }
-
 
     private class MyLinkedListIterator implements Iterator<T> {
         Node current = first;
@@ -35,7 +33,6 @@ public class LinkedList<T> implements Iterable<T> {
             return item;
         }
     }
-
 
     public void print() {
         for ( T item: this) {

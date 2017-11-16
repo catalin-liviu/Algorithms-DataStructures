@@ -36,12 +36,12 @@ public class TopologicalSort {
         postOrder.offer(v);
     }
 
-    public void display() {
+    public LinkedList<Integer> sort() {
         LinkedList<Integer> topologicalList = new LinkedList<>();
         for (int i: postOrder) {
             topologicalList.addFirst(i);
         }
-        topologicalList.print();
+        return topologicalList;
     }
 
 }

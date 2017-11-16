@@ -12,23 +12,47 @@ import org.junit.Test;
 public class StackTest {
 
     @Test
-    public void testSearch_Should_Retrieve_The_Index_In_Stack (){
-        Stack<String> myStack = new Stack<>();
-        myStack.push("first");
-        myStack.push("second");
-        myStack.push("third");
-        myStack.push("fourth");
-        myStack.push("fifth");
-        myStack.push("sixth");
+    public void testPush_should_add_item_on_top_of_the_stack() {
+        Stack<Integer> stack = new Stack<>();
+        Assert.assertTrue(stack.isEmpty());
+        Assert.assertTrue(stack.size() == 0);
+
+        stack.push(0);
+        Assert.assertFalse(stack.isEmpty());
+        Assert.assertTrue(stack.size() == 1);
+        Assert.assertTrue(stack.contains(0));
 
 
-       Assert.assertTrue(myStack.pop().equals("sixth"));
-       Assert.assertTrue(myStack.peek().equals("fifth"));
-        Assert.assertTrue(myStack.pop().equals("fifth"));
-        Assert.assertTrue(myStack.peek().equals("fourth"));
-        myStack.print();
-        int index = myStack.search("sixth");
-        System.out.println(index);
+        for (int i = 1; i < 11; i++) {
+            stack.push(i);
+        }
+
+        Assert.assertTrue(stack.size() == 11);
+        Assert.assertTrue(stack.contains(10));
+        Assert.assertTrue(stack.search(10) == 0);
+        Assert.assertTrue(stack.peek() == 10);
+        Assert.assertTrue(stack.search(8) == 2);
     }
 
+    @Test
+    public void testPop_should_remove_the_top_item_from_the_stack() {
+        Stack<Integer> stack = new Stack<>();
+        Assert.assertTrue(stack.isEmpty());
+        Assert.assertTrue(stack.size() == 0);
+
+        for (int i = 0; i < 20; i++) {
+            stack.push(i);
+        }
+
+        for (int i = 0; i < 10; i++) {
+            stack.pop();
+        }
+
+        Assert.assertTrue(stack.size() == 10);
+        Assert.assertTrue(stack.peek() == 9);
+        Assert.assertTrue(stack.search(9) == 0);
+
+        stack.pop();
+        Assert.assertTrue(stack.peek() == 8);
+    }
 }

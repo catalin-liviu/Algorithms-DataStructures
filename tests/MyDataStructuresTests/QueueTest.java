@@ -13,124 +13,46 @@ import org.junit.Test;
 public class QueueTest {
 
     @Test
-    public void testPrint(){
-        Queue queue = new Queue();
-        queue.offer(1);
-        queue.offer(2);
-        queue.offer(3);
-        queue.offer(4);
-        queue.print();
-    }
+    public void testOffer_should_add_an_item_on_the_queue_tail() {
+        Queue<Integer> queue = new Queue<>();
+        Assert.assertTrue(queue.isEmpty());
+        Assert.assertTrue(queue.size() == 0);
 
-
-    @Test
-    public void testIsEmpty(){
-        Queue queue = new Queue();
-        queue.offer(1);
-        queue.offer(2);
-        queue.offer(2);
-        queue.offer(2);
-        queue.offer(8);
-        int size = queue.size();
-
-        Assert.assertTrue(size == 5);
-
-    }
-
-    @Test
-    public void testContains(){
-        Queue queue = new Queue();
-        queue.offer(1);
-        queue.offer(1);
-        queue.offer(200);
-        queue.offer(2);
-        queue.offer(5);
-        queue.print();
-        Assert.assertTrue(queue.contains(200));
-    }
-
-    @Test
-    public void testAdd(){
-        Queue<Integer> queue = new Queue();
-        queue.add(0);
-        queue.print();
-        System.out.println();
-        queue.add(1);
-        queue.add(2);
-        queue.print();
-        boolean insertSuccesful = queue.contains(1);
-        Assert.assertTrue(insertSuccesful);
-    }
-
-    @Test
-    public void testOffer(){
-        Queue<Integer> queue = new Queue();
-        queue.offer(1);
-        queue.offer(2);
-        queue.offer(3);
-        queue.offer(4);
-        queue.print();
-        int headElement = queue.element();
-        System.out.println();
-        System.out.println(headElement);
-        boolean insertSuccessful = queue.contains(1);
-        Assert.assertTrue(insertSuccessful);
-
-    }
-
-    @Test
-    public void testPeek(){
-        Queue<Integer> queue = new Queue();
-        queue.offer(8);
-        queue.offer(3);
-        queue.offer(1);
-
-        int item = queue.peek();
-        Assert.assertTrue(item == 8);
-        queue.print();
-        queue.remove();
-        System.out.println();
-        queue.print();
+        queue.offer(0);
         Assert.assertTrue(!queue.isEmpty());
+        Assert.assertTrue(queue.size() == 1);
 
+        for (int i = 1; i <= 19  ; i++) {
+            queue.offer(i);
+        }
+
+        Assert.assertTrue(queue.size() == 20);
+        Assert.assertTrue(queue.contains(19));
+        Assert.assertTrue(!queue.contains(20));
     }
 
     @Test
-    public void testPoll(){
-        Queue<Integer> queue = new Queue();
-        queue.offer(1);
-        queue.offer(2);
-        queue.offer(3);
-        queue.offer(4);
-        queue.offer(5);
+    public void testPoll_should_remove_the_head_element_and_retrieve_the_item() {
+        Queue<Integer> queue = new Queue<>();
+        Assert.assertTrue(queue.isEmpty());
+        Assert.assertTrue(queue.size() == 0);
 
-        int item = queue.peek();
-        Assert.assertTrue(item == 1);
-        int item1 = queue.poll();
-        Assert.assertTrue(item1 == 1);
-        Assert.assertFalse(queue.isEmpty());
-        int item2 = queue.poll();
-        Assert.assertTrue(item2 == 2);
-        Assert.assertFalse(queue.isEmpty());
-        queue.print();
+        for (int i = 0; i < 20; i++) {
+            queue.offer(i);
+        }
+
+        Assert.assertTrue(queue.size() == 20);
+        queue.poll();
+        Assert.assertTrue(queue.size() == 19);
+        Assert.assertTrue(queue.peek() == 1);
+        queue.offer(20);
+
+        for (int i = 1; i < 6; i++) {
+            queue.poll();
+        }
+
+        Assert.assertTrue(queue.size() == 15);
+        Assert.assertTrue(queue.peek() == 6);
+
     }
-
-    @Test
-    public void testRemove(){
-        Queue<Integer> queue = new Queue();
-        queue.offer(1);
-        queue.offer(2);
-        queue.offer(3);
-        queue.offer(4);
-        queue.offer(5);
-
-        int item1 = queue.remove();
-        Assert.assertTrue(item1 == 1);
-        int queueHead = queue.peek();
-        Assert.assertTrue(queueHead == 2);
-        queue.remove();
-        queue.remove();
-        Assert.assertTrue(queue.peek() == 4);
-    }
-
 }

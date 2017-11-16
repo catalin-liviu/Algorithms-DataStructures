@@ -44,6 +44,7 @@ public class Queue<T> implements Iterable<T>{
 
     public boolean contains(Object o){
        QueueIterator iterator = new QueueIterator();
+
        while (iterator.hasNext()) {
            if (iterator.next().equals(o)) {
                return true;

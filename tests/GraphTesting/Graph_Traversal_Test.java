@@ -15,37 +15,26 @@ public class Graph_Traversal_Test {
 
     @Test
     public void testDFS() {
-        UndirectedGraphAdjListRepresented graph = new UndirectedGraphAdjListRepresented(13);
+        UndirectedGraphAdjListRepresented G = new UndirectedGraphAdjListRepresented(13);
+        G.addEdge(0,1); G.addEdge(0,2); G.addEdge(0,5); G.addEdge(0,6);
+        G.addEdge(2,3); G.addEdge(3,5); G.addEdge(4,5); G.addEdge(4,6);
+        G.addEdge(6,7); G.addEdge(6,9); G.addEdge(7,8); G.addEdge(9,10);
+        G.addEdge(9,11); G.addEdge(9,12); G.addEdge(11,12);
 
-        graph.addEdge(0, 1);
-        graph.addEdge(0, 2);
-        graph.addEdge(1, 4);
-        graph.addEdge(1, 5);
-        graph.addEdge(4, 3);
-        graph.addEdge(3, 6);
-        graph.addEdge(3, 7);
-        graph.addEdge(5, 6);
-        graph.addEdge(6, 7);
-        graph.addEdge(7, 8);
-        graph.addEdge(8, 9);
-        graph.addEdge(8, 10);
-        graph.addEdge(4, 10);
-        graph.addEdge(2, 11);
-        graph.addEdge(11, 12);
-        graph.addEdge(2, 9);
+        G.addEdge(1,10);
 
-        System.out.println(graph);
-        Assert.assertTrue(graph.V() == 13);
+        System.out.println(G);
+        Assert.assertTrue(G.V() == 13);
         System.out.println("Vertices Number - Assert Successful");
-        Assert.assertTrue(graph.E() == 16);
+        Assert.assertTrue(G.E() == 16);
         System.out.println("Edges Number - Assert Successful");
 
 
         /*
         * path search
         * */
-        DFS processDFS = new DFS(graph, 0);
-        BFS processBFS = new BFS(graph, 0);
+        DFS processDFS = new DFS(G, 0);
+        BFS processBFS = new BFS(G, 0);
 
 
 
@@ -53,21 +42,21 @@ public class Graph_Traversal_Test {
         * show path from source to a given vertex
         * */
         System.out.println("Path - from destination to source" + processDFS.pathTo(10).toString());
-        System.out.println("Path - from destination to source" + processDFS.pathTo(7).toString());
+        System.out.println("Path - from destination to source" + processDFS.pathTo(5).toString());
 
         /*
         * show the shortest path from source to a given vertex
         * */
         System.out.println("Shortest Path - from destination to source" + processBFS.pathTo(10).toString());
-        System.out.println("Shortest Path - from destination to source" + processBFS.pathTo(7).toString());
+        System.out.println("Shortest Path - from destination to source" + processBFS.pathTo(5).toString());
 
         int i = 0;
-        while (i <= 50) {
+        while (i <= 100) {
             int steps = -1;
-            for (int x: processBFS.pathTo(10)) {
+            for (int x: processBFS.pathTo(5)) {
                 steps++;
             }
-            Assert.assertTrue(steps == 3);
+            Assert.assertTrue(steps == 1);
             i++;
         }
 

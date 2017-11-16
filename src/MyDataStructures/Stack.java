@@ -20,11 +20,35 @@ public class Stack<T> {
             System.out.println(it.item);
             it = it.link;
         }
-
     }
 
     public boolean isEmpty() {
         return head == null;
+    }
+
+    public int size() {
+        int items = 0;
+        if (isEmpty()) {
+            return items;
+        } else {
+            Node it = head;
+            while (it != null) {
+                it = it.link;
+                items++;
+            }
+            return items;
+        }
+    }
+
+    public boolean contains(Object o) {
+        Node it = head;
+        while (it != null) {
+            if (it.item.equals(o)) {
+                return true;
+            }
+            it = it.link;
+        }
+        return false;
     }
 
     public void push(T item){

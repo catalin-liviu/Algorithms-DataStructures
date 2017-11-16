@@ -34,6 +34,17 @@ public class Bag<T> implements Iterable<T> {
         return n;
     }
 
+    public boolean contains(Object o) {
+        BagIterator iterator = new BagIterator();
+
+        while (iterator.hasNext()) {
+            if (iterator.next().equals(o)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public void add(T item) {
         if(first == null){

@@ -9,179 +9,79 @@ import org.junit.Test;
 public class LinkedListTest {
 
     @Test
-    public void testConstructor(){
-        System.out.println("\ntestConstructor");
-        LinkedList list = new LinkedList();
+    public void testAdd_should_add_item_at_specified_index() {
+        LinkedList<Integer> linkedList = new LinkedList<>();
 
-        Assert.assertNotNull(list);
-        Assert.assertTrue(list.size() == 0);
-        Assert.assertFalse(list.contains(2));
+        Assert.assertTrue(linkedList.isEmpty());
+        Assert.assertTrue(linkedList.size() == 0);
+
+        linkedList.add(0, 0);
+        Assert.assertTrue(!linkedList.isEmpty());
+        Assert.assertTrue(linkedList.size() == 1);
+
+        linkedList.add(1, 1);
+        linkedList.add(2, 2);
+        linkedList.add(3, 3);
+        linkedList.add(4, 4);
+        linkedList.add(5, 5);
+        linkedList.add(6, 6);
+        linkedList.add(7, 7);
+        linkedList.add(8, 8);
+        linkedList.add(9, 9);
+        linkedList.add(10, 10);
+        linkedList.add(11, 1000);
+
+        Assert.assertTrue(linkedList.size() == 12);
+        Assert.assertTrue(linkedList.contains(1000));
+
+        int lastIndex = linkedList.size()-1;
+        Assert.assertTrue(linkedList.get(lastIndex) == 1000);
     }
 
-    @Test
-    public void testPrint(){
-        System.out.println("\ntestPrint");
-        LinkedList list = new LinkedList();
-
-        list.addFirst(1);
-        list.addFirst(0);
-        list.addFirst(1);
-        list.print();
-        System.out.println();
-    }
 
     @Test
-    public void testGet(){
-
-        LinkedList<String> list =  new LinkedList<>();
-        list.addFirst("to");
-        list.addLast("be");
-        list.addLast("or");
-        list.addLast("not");
-        list.addLast("to");
-        list.addLast("be");
-        list.addLast(", ");
-        list.addLast("that");
-        list.addLast("is");
-        list.addLast("the");
-        list.addLast("question");
-
-        String item = list.get(2);
-        System.out.println(item);
-        int size = list.size();
-        System.out.println(size);
-        Assert.assertTrue(item == "or");
-
-        for (String s : list) {
-            System.out.printf("%s ", s);
+    public void testGet_should_return_the_element_at_specified_index() {
+        LinkedList<Integer> linkedList = new LinkedList<>();
+        for (int i = 0; i < 1000; i++) {
+            linkedList.add(i, i);
         }
+        Assert.assertTrue(linkedList.get(700) == 700);
+        linkedList.add(700, 777);
+        Assert.assertTrue(linkedList.get(700) == 777);
+        Assert.assertTrue(linkedList.get(701) == 700);
+        Assert.assertTrue(linkedList.size() == 1001);
+        linkedList.addFirst(1000);
+        Assert.assertTrue(linkedList.get(701) == 777);
+        Assert.assertTrue(linkedList.size() == 1002);
     }
 
     @Test
-    public void testAdd(){
-        System.out.println("testAdd");
-        LinkedList list = new LinkedList();
-        list.addFirst(0);
-        list.addLast(1);
-        list.addLast(2);
-        list.addLast(3);
-        list.addLast(4);
-        list.addLast(5);
-        list.addLast(6);
-        list.addLast(7);
-        list.addLast(8);
-        list.addLast(9);
-        list.addLast(10);
-        list.addLast(11);
-        list.addLast(12);
-        list.addLast(13);
-        list.addFirst(1111);
-        list.print();
-        System.out.println();
-
-        list.add(0, 1000);
-        list.print();
-
-
-    }
-
-    @Test
-    public void testAddLast(){
-        System.out.println("testAddLast");
-        LinkedList list = new LinkedList();
-
-        list.addLast(1);
-        list.addLast(2);
-        list.addLast(3);
-        list.addFirst(0);
-        list.print();
-        System.out.println();
-
-        //Asserts
-        Assert.assertTrue(!list.isEmpty());
-        Assert.assertTrue(4 == list.size());
-    }
-
-    @Test
-    public void testRemove(){
-        System.out.println("testRemove");
-        LinkedList list = new LinkedList();
-        list.addFirst(0);
-        list.addLast(0);
-        list.addLast(7);
-        list.addFirst(5);
-
-        boolean hasItem = list.contains(3);
-        Assert.assertFalse(hasItem);
-
-        list.addLast(7);
-        Assert.assertTrue(list.contains(7));
-        list.print();
-        System.out.println();
-
-        list.add(0,5);
-        list.print();
-        list.remove(5);
-        System.out.println();
-        list.print();
-        list.remove(7);
-        System.out.println();
-        list.print();
-    }
-
-    @Test
-    public void testSize(){
-        System.out.println("testSize");
-        LinkedList list = new LinkedList();
-        list.addFirst(0);
-        list.addLast(7);
-        list.addLast(7);
-
-        Assert.assertTrue(!list.isEmpty());
-        Assert.assertTrue(list.size() == 3);
-    }
-
-    @Test
-    public void testIsEmpty(){
-        System.out.println("\ntestIsEmpty");
-        LinkedList list = new LinkedList();
-
-        Assert.assertNotNull("List instantiated", list);
-        Assert.assertTrue(list.size() == 0);
-    }
-
-    @Test
-    public void testContains(){
-        System.out.println("testContains");
-        LinkedList list = new LinkedList();
-        Assert.assertTrue(list.isEmpty());
-
-        list.addLast(8);
-        list.addFirst(0);
-        list.print();
-        System.out.println();
-
-        Assert.assertFalse(list.isEmpty());
-        Assert.assertTrue(list.contains(8));
-        Assert.assertTrue(list.contains(0));
-        Assert.assertFalse(list.contains(100));
-    }
-
-    @Test
-    public void testReverseList(){
-        System.out.println("testReverseList");
-        LinkedList<Integer> list = new LinkedList();
-
-        for(int i = 0; i < 20; i++){
-            list.add(i, i);
-        }
-        list.print();
-        list.reverseList();
-        System.out.println();
-
-        for (Integer i : list) {
-            System.out.printf("%d ", i);
+    public void testRemove_should_remove_item_from_list() {
+        LinkedList<Integer> linkedList = new LinkedList<>();
+        for (int i = 0; i < 1000; i++) {
+            linkedList.add(i, i);
         }
 
+        linkedList.remove(500);
+        Assert.assertTrue(linkedList.size() == 999);
+        Assert.assertTrue(!linkedList.contains(500));
+        Assert.assertTrue(linkedList.contains(999));
+        linkedList.remove(999);
+        int lastItemIndex = linkedList.size() - 1;
+        Assert.assertTrue(linkedList.get(lastItemIndex) == 998);
+        linkedList.addLast(10000);
+        Assert.assertTrue(linkedList.get(linkedList.size() - 1) == 10000);
+    }
+
+    @Test
+    public void testReverseList_should_reverse_the_list() {
+        LinkedList<Integer> linkedList = new LinkedList<>();
+        for (int i = 0; i < 50; i++) {
+            linkedList.add(i, i);
+        }
+        linkedList.reverseList();
+
+        Assert.assertTrue(linkedList.get(0) == 49);
+        Assert.assertTrue(linkedList.get(linkedList.size() / 2) == 24);
     }
 }

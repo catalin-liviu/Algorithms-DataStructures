@@ -1,5 +1,6 @@
 package DirectedGraph;
 
+import EdgeWeightedDigraph.DirectedEdge;
 import MyDataStructures.Bag;
 
 public class EdgeWeightedDirectedGraph {

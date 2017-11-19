@@ -1,5 +1,7 @@
 package DirectedGraph;
 
+import EdgeWeightedDigraph.DirectedGraphAdjListRepresented;
+
 import java.util.Stack;
 
 /**

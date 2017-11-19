@@ -1,13 +1,13 @@
-package DirectedGraph;
+package EdgeWeightedDigraph;
 
 public class DirectedEdge {
 
     private final int v;
     private final int w;
-    private final float weight;
+    private final double weight;
 
 
-    public DirectedEdge (int v, int w, float weight) {
+    public DirectedEdge (int v, int w, double weight) {
         this.v = v;
         this.w = w;
         this.weight = weight;

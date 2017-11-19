@@ -1,4 +1,4 @@
-package DirectedGraph;
+package EdgeWeightedDigraph;
 
 
 import MyDataStructures.Bag;

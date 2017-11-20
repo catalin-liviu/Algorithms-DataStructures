@@ -1,6 +1,8 @@
 package DirectedGraph;
 
-import java.util.Stack;
+import EdgeWeightedDigraph.DirectedGraphAdjListRepresented;
+import MyDataStructures.Stack;
+
 
 /**
  * Created by catalin.dinu on 11/8/2017.

@@ -1,4 +1,4 @@
-package DirectedGraph;
+package EdgeWeightedDigraph;
 
 
 import MyDataStructures.Bag;
@@ -30,6 +30,16 @@ public class DirectedGraphAdjListRepresented {
     * Adds one direction edge between two vertices
     * */
     public void addEdge(int v, int w){
+        validateVertex(v);
+        validateVertex(w);
+        adj[v].add(w);
+        E++;
+    }
+
+
+    public void addEdge(DirectedEdge edge) {
+        int v = edge.from();
+        int w = edge.to();
         validateVertex(v);
         validateVertex(w);
         adj[v].add(w);

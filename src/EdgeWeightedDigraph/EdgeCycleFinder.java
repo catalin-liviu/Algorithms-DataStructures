@@ -1,36 +1,32 @@
-package DirectedGraph;
+package EdgeWeightedDigraph;
 
-import EdgeWeightedDigraph.DirectedGraphAdjListRepresented;
+import DirectedGraph.EdgeWeightedDirectedGraph;
 
 import java.util.Stack;
 
-/**
- * Created by catalin.dinu on 11/8/2017.
- */
-
-public class CycleFinder {
-
+public class EdgeCycleFinder {
     private boolean[] marked;
     private boolean[] onStack;
-    private int[] edgeTo;
-    private Stack<Integer> cycle;
+    private DirectedEdge[] edgeTo;
+    private Stack<DirectedEdge> cycle;
 
-    public CycleFinder(DirectedGraphAdjListRepresented G) {
+    public EdgeCycleFinder(EdgeWeightedDirectedGraph G) {
         marked = new boolean[G.V()];
         onStack = new boolean[G.V()];
-        edgeTo = new int[G.V()];
+        edgeTo = new DirectedEdge[G.V()];
         for (int v = 0; v < G.V(); v++) {
-            if (!marked[v] && cycle == null) {
+            if (!marked[v]) {
                 dfs(G, v);
             }
         }
     }
 
-    private void dfs(DirectedGraphAdjListRepresented G, int v) {
+    private void dfs(EdgeWeightedDirectedGraph G, int v) {
         onStack[v] = true;
         marked[v] = true;
         // go through every vertex adjacent to v
-        for (int w: G.adj(v)) {
+        for (DirectedEdge edge: G.adj(v)) {
+            int w = edge.to();
             // if there is a cycle short circuit
             if (cycle != null) {
                 return;
@@ -38,15 +34,17 @@ public class CycleFinder {
                 * if adjacent vertex are unmarked ad v as the edgeTo and run dfs recursively
                 * */
             } else if (!marked[w]) {
-                edgeTo[w] = v;
+                edgeTo[w] = edge;
                 dfs(G, w);
             } else if (onStack[w]) {
-                cycle = new Stack<Integer>();
-                for (int x = v; x != w ; x = edgeTo[x]) {
-                    cycle.push(x);
+                cycle = new Stack<DirectedEdge>();
+                DirectedEdge f = edge;
+                while (f.from() != w) {
+                    cycle.push(f);
+                    f = edgeTo[f.from()];
                 }
-                cycle.push(w);
-                cycle.push(v);
+                cycle.push(f);
+                return;
             }
         }
         onStack[v] = false;
@@ -63,7 +61,7 @@ public class CycleFinder {
     /*
     * Returns a cycle if there is one / null otherwise
     * */
-    public Iterable<Integer> cycle() {
+    public Iterable<DirectedEdge> cycle() {
         return cycle;
     }
 

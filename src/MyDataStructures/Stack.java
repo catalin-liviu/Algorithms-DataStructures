@@ -1,12 +1,20 @@
 package MyDataStructures;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /**
  * Created by catalin.dinu on 10/31/2017.
  */
 
-public class Stack<T> {
+public class Stack<T> implements Iterable<T>{
 
     private Node head;
+
+    @Override
+    public Iterator<T> iterator() {
+        return new StackIterator();
+    }
 
     private class Node {
         T item;
@@ -15,10 +23,8 @@ public class Stack<T> {
 
     public void print(){
 
-        Node it = head;
-        while (it != null){
-            System.out.println(it.item);
-            it = it.link;
+        for (T item : this) {
+            System.out.print(" " + item + "");
         }
     }
 
@@ -27,26 +33,20 @@ public class Stack<T> {
     }
 
     public int size() {
+        StackIterator iterator = new StackIterator();
         int items = 0;
-        if (isEmpty()) {
-            return items;
-        } else {
-            Node it = head;
-            while (it != null) {
-                it = it.link;
-                items++;
-            }
-            return items;
+        for (T item: this) {
+            items++;
         }
+        return items;
     }
 
     public boolean contains(Object o) {
-        Node it = head;
-        while (it != null) {
-            if (it.item.equals(o)) {
+        StackIterator iterator = new StackIterator();
+        while (iterator.hasNext()) {
+            if (iterator.next().equals(o)) {
                 return true;
             }
-            it = it.link;
         }
         return false;
     }
@@ -79,15 +79,33 @@ public class Stack<T> {
     }
 
     public int search(Object o) {
-        Node it = head;
+        StackIterator iterator = new StackIterator();
         int index = 0;
-        while (it != null) {
-            if ( it.item.equals(o)) {
+        while (iterator.hasNext()) {
+            if ( iterator.next().equals(o)) {
                 return index;
             }
-            it = it.link;
             index++;
         }
         return -1;
+    }
+
+    private class StackIterator implements Iterator<T> {
+        Node current = head;
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            T item = current.item;
+            current = current.link;
+            return item;
+        }
     }
 }

@@ -2,6 +2,7 @@ package GraphTesting;
 
 
 import DirectedGraph.*;
+import EdgeWeightedDigraph.DirectedGraphAdjListRepresented;
 import MyDataStructures.Bag;
 import MyDataStructures.LinkedList;
 import org.junit.Assert;

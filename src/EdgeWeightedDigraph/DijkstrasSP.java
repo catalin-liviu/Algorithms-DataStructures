@@ -1,36 +1,61 @@
 package EdgeWeightedDigraph;
 
 import DirectedGraph.EdgeWeightedDirectedGraph;
+import MyDataStructures.Stack;
 
-import java.util.Comparator;
-import java.util.PriorityQueue;
-import java.util.Stack;
 
 public class DijkstrasSP {
 
     private DirectedEdge[] edgeTo;
     private double[] distTo;
     private MinPQ<Double> pq;
+    // private PriorityQueue<DirectedEdge> pq;
+
 
     public DijkstrasSP(EdgeWeightedDirectedGraph G, int source) {
         // initialize member variable
         edgeTo = new DirectedEdge[G.V()];
         distTo = new double[G.V()];
-        pq = new MinPQ<Double>(G.V());
 
         // set the distTo value for all the vertices in the graph to positive infinite
         for (int v = 0; v < G.V(); v++) {
             distTo[v] = Double.POSITIVE_INFINITY;
         }
+
         // set the distTo source value to 0.0, the only distTo known at the moment
         distTo[source] = 0.0;
 
-        // put the source in the queue
-        pq.insert(source, distTo[source]);
 
+        // Place the source in the queue
+        /**
+        * This implementation uses MinPQ Custom Class
+        * */
+        pq = new MinPQ<Double>(G.V());
+        pq.insert(source, distTo[source]);
+        /**
+        * This implementation uses java.util.priority queue
+        */
+//       pq = new PriorityQueue<DirectedEdge>(new Comparator<DirectedEdge>() {
+//           @Override
+//           public int compare(DirectedEdge edge1, DirectedEdge edge2) {
+//               if (((Double) edge1.weight()).compareTo(edge2.weight()) > 0) {
+//                   return 1;
+//               } else if (((Double) edge1.weight()).compareTo(edge2.weight()) < 0) {
+//                   return -1;
+//               } else {
+//                   return 0;
+//               }
+//           }
+//       });
+//       pq.add(new DirectedEdge(source, source, 0.0));
+
+
+        /*
+        * Edge relaxation
+        * */
         while (!pq.isEmpty()) {
+            // java.util.pq Implementation: int v = pq.poll().to();
             int v = pq.delMin();
-            // MinPQ Implementation: int v = pq.delMin();
             for (DirectedEdge edge: G.adj(v)) {
                 relax(edge);
             }
@@ -49,6 +74,16 @@ public class DijkstrasSP {
             } else { // if there isn't insert it in queue
                 pq.insert(w, distTo[w]);
             }
+
+            /**
+             * This implementation uses java.util.priority queue
+             */
+//            if (pq.contains(edge)) {
+//                pq.remove(edge);
+//            } else {
+//                pq.add(edge);
+//            }
+
         }
     }
 

@@ -36,6 +36,16 @@ public class DirectedGraphAdjListRepresented {
         E++;
     }
 
+
+    public void addEdge(DirectedEdge edge) {
+        int v = edge.from();
+        int w = edge.to();
+        validateVertex(v);
+        validateVertex(w);
+        adj[v].add(w);
+        E++;
+    }
+
     /*
     * Returns the number of vertices
     * */
